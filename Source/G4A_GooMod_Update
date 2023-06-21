@@ -1,0 +1,11 @@
+#!/bin/bash
+Temporary_GooMods_Update_Path="$(cat "$PWD/G4A_GooMod_Update_Configs/DEST_PATH_DIR")/modded.apk"
+GooMods_Update_Path="$(cat "$PWD/G4A_GooMod_Update_Configs/DEST_PATH_DIR")/Update.apk"
+if [ ! "$1" = '' ]; then cd "$1" || dialog --title 'ERROR' --msgbox 'Failed To The Custom Open Directory.' 10 50; clear; exit; fi
+dialog --title 'GooTool For Android GooMods Update' --infobox 'Moving The GooMods Android Package Kit... Please Do Not Press (Control+C) Or Kill The This Session.' 10 50
+if [ ! -e "$Temporary_GooMods_Update_Path" ]; then clear; dialog --title 'ERROR' --msgbox "The GooMods Android Package Kit For Updating Not Found. $(tree "$PWD")" 10 50; clear; exit; fi
+if [ -e "$GooMods_Update_Path" ]; then rm "$GooMods_Update_Path"; mv "$Temporary_GooMods_Update_Path" "$GooMods_Update_Path"; else mv "$Temporary_GooMods_Update_Path" "GooMods_Update_Path"; fi
+if [ ! "$?" = '0' ]; then clear; dialog --title 'ERROR' --msgbox 'Something Went Wrong While File Was Moving.' 10 50; clear; exit; fi
+clear
+dialog --title 'Succeed' --msgbox 'The GooMods Android Package Kit For Updating Been Successfully Moved.' 10 50
+clear
